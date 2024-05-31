@@ -4,6 +4,7 @@ import { databaseconnection } from "./data/database.js"
 import cookieParser from "cookie-parser"
 import { errorMiddleware } from "./middlewares/error.middlewares.js"
 import router from "./routers/user.routes.js"
+import cors from "cors"
 config({ path: "./config/.env" })
 const app = express()
 
@@ -11,6 +12,13 @@ const app = express()
 app.use(express.json())
 databaseconnection()
 app.use(cookieParser())
+app.use(
+  cors({
+    origin: true,
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    credentials: true,
+  })
+)
 // Routers //
 app.use("/api/user", router)
 //Servers //
