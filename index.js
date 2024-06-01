@@ -14,7 +14,7 @@ databaseconnection()
 app.use(cookieParser())
 app.use(
   cors({
-    origin: true,
+    origin: "*",
     credentials: true,
   })
 )

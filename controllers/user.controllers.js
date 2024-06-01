@@ -12,7 +12,7 @@ export const postRegister = async (req, res, next) => {
     }
 
     const hasspassword = bcryptjs.hashSync(password, 10)
-    console.log(req.body)
+
     await User.create({ name, email, password: hasspassword })
     res
       .status(200)
@@ -40,6 +40,8 @@ export const postLogin = async (req, res, next) => {
       .cookie("token", token, {
         httpOnly: true,
         maxAge: 24 * 60 * 60 * 1000,
+        secure: true,
+        sameSite: "None",
       })
       .status(200)
       .json({ success: true, message: "User Login Successfuly" })
